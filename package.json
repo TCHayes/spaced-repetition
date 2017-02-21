@@ -1,0 +1,16 @@
+{
+  "name": "thinkful-full-stack-template",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-p start:client start:server",
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start"
+  },
+  "author": "Joe Turner <jturner@thinkful.com>",
+  "license": "MIT",
+  "dependencies": {
+    "npm-run-all": "^4.0.1"
+  }
+}
