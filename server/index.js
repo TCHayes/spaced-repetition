@@ -1,9 +1,9 @@
+const path = require('path');
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 
-const config = require('./config');
 const secret = require('./secret');
 
 const app = express();
@@ -11,19 +11,13 @@ const app = express();
 const database = {
 };
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', config.CLIENT_ROOT);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-});
-
 app.use(passport.initialize());
 
 passport.use(
     new GoogleStrategy({
         clientID:  '689026946763-rtsrhg52nra9oai4tk7gb05fs8f1t43l.apps.googleusercontent.com',
         clientSecret: secret,
-        callbackURL: `${config.ROOT}/auth/google/callback`
+        callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
         // Job 1: Set up Mongo/Mongoose, create a User model which store the
@@ -52,21 +46,21 @@ passport.use(
     )
 );
 
-app.get('/auth/google',
+app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
 
-app.get('/auth/google/callback',
+app.get('/api/auth/google/callback',
     passport.authenticate('google', {
-        failureRedirect: `${config.CLIENT_ROOT}`,
+        failureRedirect: '/',
         session: false
     }),
     (req, res) => {
         res.cookie('accessToken', req.user.accessToken, {expires: 0});
-        res.redirect(`${config.CLIENT_ROOT}`);
+        res.redirect('/');
     }
 );
 
-app.get('/auth/logout', (req, res) => {
+app.get('/api/auth/logout', (req, res) => {
     req.logout();
     res.clearCookie('accessToken');
     res.redirect('/');
@@ -84,11 +78,20 @@ app.get('/api/questions',
     (req, res) => res.json(['Question 1', 'Question 2'])
 );
 
+// Serve the built client
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+// Unhandled requests which aren't for the API should serve index.html so
+// client-side routing using browserHistory can function
+app.get(/^(?!\/api(\/|$))/, (req, res) => {
+    const index = path.resolve(__dirname, '../client/build', 'index.html');
+    res.sendFile(index);
+});
+
 let server;
-function runServer(host, port) {
+function runServer(port=3001) {
     return new Promise((resolve, reject) => {
-        server = app.listen(port, host, () => {
-            console.log(`Server running on ${host}:${port}`);
+        server = app.listen(port, () => {
             resolve();
         }).on('error', reject);
     });
@@ -106,7 +109,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-    runServer(config.HOST, config.PORT);
+    runServer();
 }
 
 module.exports = {

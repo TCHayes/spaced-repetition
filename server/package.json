@@ -1,12 +1,12 @@
 {
   "name": "thinkful-full-stack-template-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server portion of a full-stack starter template",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "Joe Turner <joe@oampo.co.uk>",
+  "author": "Joe Turner <jturner@thinkful.com>",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^1.11.0"

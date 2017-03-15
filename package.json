@@ -1,16 +1,30 @@
 {
-  "name": "thinkful-full-stack-template",
+  "name": "thinkful-full-stack-template-v2",
   "version": "0.1.0",
-  "description": "",
+  "description": "A full-stack starter template",
   "main": "index.js",
   "scripts": {
-    "start": "run-p start:client start:server",
-    "start:client": "cd client && npm start",
-    "start:server": "cd server && npm start"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm run build",
+    "dev": "run-p dev:server dev:client start",
+    "dev:client": "cd client && cross-env BROWSER=none npm start -- --color=always | xp http://localhost:3000/ http://localhost:8080/",
+    "dev:server": "cd server && npm start",
+    "install": "run-s install:server install:client",
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "server/node_modules",
+    "client/node_modules"
+  ],
   "author": "Joe Turner <jturner@thinkful.com>",
   "license": "MIT",
   "dependencies": {
-    "npm-run-all": "^4.0.1"
+    "cross-env": "^3.1.4",
+    "express": "^4.14.1",
+    "http-proxy-middleware": "^0.17.3",
+    "npm-run-all": "^4.0.1",
+    "xp": "^1.0.1"
   }
 }

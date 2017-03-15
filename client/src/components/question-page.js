@@ -1,6 +1,5 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
-import {SERVER_ROOT} from '../config';
 
 export default class QuestionPage extends React.Component {
     constructor(props) {
@@ -12,7 +11,7 @@ export default class QuestionPage extends React.Component {
 
     componentDidMount() {
         const accessToken = Cookies.get('accessToken');
-        fetch(`${SERVER_ROOT}/api/questions`, {
+        fetch('/api/questions', {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

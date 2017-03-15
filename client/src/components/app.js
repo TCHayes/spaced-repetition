@@ -3,7 +3,6 @@ import * as Cookies from 'js-cookie';
 
 import QuestionPage from './question-page';
 import LoginPage from './login-page';
-import {SERVER_ROOT} from '../config';
 
 class App extends React.Component {
     constructor(props) {
@@ -17,7 +16,7 @@ class App extends React.Component {
         // Job 4: Redux-ify all of the state and fetch calls to async actions.
         const accessToken = Cookies.get('accessToken');
         if (accessToken) {
-            fetch(`${SERVER_ROOT}/api/me`, {
+            fetch('/api/me', {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
