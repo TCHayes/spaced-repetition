@@ -1,6 +1,12 @@
 # Space Repetition Starter Kit
 
-## Clone the repo
+This should get you started with your Spaced Repetition app. We're giving you your basic directory structure, and the framework for authentication. However, we aren't persisting any information, and it will be your job to add Mongo/Mongoose. There are helpful comments in `server/index.js`.
+
+In development, the starter kit runs two servers. One of which is from `create-react-app`, so you get all the fancy hot reloading, etc, the other is the backend. In production, we use generate a static folder with all our React stuff, and serve that with Express.
+
+## Getting started
+
+### Clone the repo
 
 ```sh
 $ git clone https://github.com/bookcasey/spaced-repetition-starter
@@ -14,8 +20,9 @@ $ cd spaced-repetition-starter
 $ npm install
 ```
 
+You can run it locally now with `npm run dev`, but the Google OAuth stuff won't work without your own credentials.
 
-## Google OAuth Credentials
+### Get Google OAuth Credentials
 
 Visit console.developers.google.com
 
@@ -46,7 +53,13 @@ module.exports = {
 }
 ```
 
-This file is in ignored by git because it is in your `.gitignore`. Never commit or push this file.
+This file is in ignored by git because it is in your `.gitignore`. Never commit or push 'secret.js', the client id and secret need to be kept safe like a password.
+
+### Local Development
+
+```sh
+  npm run dev
+```
 
 ## Deployment to Heroku
 
@@ -54,9 +67,12 @@ This file is in ignored by git because it is in your `.gitignore`. Never commit 
 $ heroku create
 ```
 
+Configure your Google client id and secret on Heroku:
+
 ```sh
 $ heroku config:set CLIENT_ID=yourId123.apps.googleusercontent.com CLIENT_SECRET=yoursecret
 ```
+
 (You can also do this on dashboard.heroku.com under your app's settings.)
 
 ### To deploy:
@@ -65,15 +81,15 @@ $ heroku config:set CLIENT_ID=yourId123.apps.googleusercontent.com CLIENT_SECRET
 $ git push heroku master
 ```
 
-Your app should be live on heroku now, but if you try to `Log in with Google`, you will get a 400 error. Take note of your new app's URL.
+Your app should be live on Heroku soon, but if you try to `Log in with Google`, you will get a 400 error. Take note of your new app's URL.
 
 
-### Updating Google API authorized origins
+#### Updating Google API authorized origins
 
 
 To fix this, go back to the Google API Dashboard and:
 
-- Add `your-app-name-123.herokuapp.com` to Authorized JavaScript origins
-- Add `your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorized redirect URIs
+- Add `http://your-app-name-123.herokuapp.com` to Authorized JavaScript origins
+- Add `http://your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorized redirect URIs
 
 Try to log in  `Log in with Google` again, and you're golden!
