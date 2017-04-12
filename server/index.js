@@ -15,8 +15,8 @@ app.use(passport.initialize());
 
 passport.use(
     new GoogleStrategy({
-        clientID:  '689026946763-rtsrhg52nra9oai4tk7gb05fs8f1t43l.apps.googleusercontent.com',
-        clientSecret: secret,
+        clientID:  secret.CLIENT_ID || process.env.CLIENT_ID,
+        clientSecret: secret.CLIENT_SECRET || process.env.CLIENT_SECRET,
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
@@ -35,7 +35,7 @@ passport.use(
 passport.use(
     new BearerStrategy(
         (token, done) => {
-            // Job 3: Update this callback to try to find a user with a 
+            // Job 3: Update this callback to try to find a user with a
             // matching access token.  If they exist, let em in, if not,
             // don't.
             if (!(token in database)) {
