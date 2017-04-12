@@ -4,7 +4,14 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 
-const secret = require('./secret');
+let secret = {
+  CLIENT_ID: process.env.CLIENT_ID,
+  CLIENT_SECRET: process.env.CLIENT_SECRET
+}
+
+if(process.env.NODE_ENV != 'production') {
+  secret = require('./secret');
+}
 
 const app = express();
 
@@ -15,8 +22,8 @@ app.use(passport.initialize());
 
 passport.use(
     new GoogleStrategy({
-        clientID:  secret.CLIENT_ID || process.env.CLIENT_ID,
-        clientSecret: secret.CLIENT_SECRET || process.env.CLIENT_SECRET,
+        clientID:  secret.CLIENT_ID,
+        clientSecret: secret.CLIENT_SECRET,
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
