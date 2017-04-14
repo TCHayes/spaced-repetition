@@ -6,10 +6,12 @@ In development, the starter kit runs two servers. One of which is from `create-r
 
 ## Getting started
 
+First, fork the repo on Github to your own account
+
 ### Clone the repo
 
 ```sh
-$ git clone https://github.com/bookcasey/spaced-repetition-starter
+$ git clone https://github.com/YOUR_USERNAME_HERE/spaced-repetition-starter
 ```
 
 ```sh
