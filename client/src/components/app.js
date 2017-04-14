@@ -22,7 +22,7 @@ class App extends React.Component {
                 }
             }).then(res => {
                 if (!res.ok) {
-                    if (res.status !== 401) {
+                    if (res.status === 401) {
                         // Unauthorized, clear the cookie and go to
                         // the login page
                         Cookies.remove('accessToken');
