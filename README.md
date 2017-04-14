@@ -32,6 +32,7 @@ Visit https://console.developers.google.com
 
 
 * Navigate to Credentials
+* It may require you to configure OAuth consent screen.
 * Click 'Create credentials'
 * Choose 'OAuth Client ID'
 * Choose 'Web application'
