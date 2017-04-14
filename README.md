@@ -24,21 +24,20 @@ You can run it locally now with `npm run dev`, but the Google OAuth stuff won't 
 
 ### Get Google OAuth Credentials
 
-Visit console.developers.google.com
+Visit https://console.developers.google.com
 
-Navigate: Library > Social APIs > Google+ API
+* Navigate to Library 
+* Under 'Social APIs', Click 'Google+ API'
+* Click 'Enable' at the top (if it isn't already)
 
-Click 'Enable'
 
-Click 'Create credentials'
-	> OAuth Client ID
-		> Choose 'Web application'
-
-Add `http://localhost:8080` to Authorized JavaScript origins
-
-Add `http://localhost:8080/api/auth/google/callback` to Authorized redirect URIs
-
-Click 'Create'
+* Navigate to Credentials
+* Click 'Create credentials'
+* Choose 'OAuth Client ID'
+* Choose 'Web application'
+* Add `http://localhost:8080` to Authorized JavaScript origins
+* Add `http://localhost:8080/api/auth/google/callback` to Authorized redirect URIs
+* Click 'Create'
 
 You should get a Client ID and Secret.
 
@@ -88,6 +87,8 @@ Your app should be live on Heroku soon, but if you try to `Log in with Google`, 
 
 
 To fix this, go back to the Google API Dashboard and:
+
+(You might need to use `http` and or `http` for your Heroku URIs)
 
 - Add `http://your-app-name-123.herokuapp.com` to Authorized JavaScript origins
 - Add `http://your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorized redirect URIs
