@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.user-info {
+  border: 1px solid black;
+}
+
+.logout {
+  border: 1px solid black;
+}
+
+.question-list {
+  border: 1px solid black;
+}
+
+.answer-list {
+  border: 1px solid black;
+}
