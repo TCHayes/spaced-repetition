@@ -82,7 +82,9 @@ app.get('/api/me',
 
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json(['Question 1', 'Question 2'])
+    (req, res) => res.json(
+      [{letters:'H', name:'Hydrogen', atomic: 1},
+      {letters:'He', name:'Helium', atomic: 2}])
 );
 
 // Serve the built client
