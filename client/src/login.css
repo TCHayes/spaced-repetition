@@ -1,7 +1,32 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.slogan {
+  align-self: center;
+}
+
+.main-title {
+  align-self: center;
+
+}
+
+a:link    {
+  text-decoration:  none;
+  color:            #FFF;
+  }
+a:visited {
+  text-decoration:  none;
+  background-color: #ddd;
+  color:            #FFF;
+  }
+
 .loginBtn {
-  box-sizing: border-box;
   position: relative;
-  /* width: 13em;  - apply for fixed size */
+  align-self: center;
+  max-width: 280px;
+  max-height: 70px;
   margin: 0.5em;
   padding: 0 15px 0 46px;
   border: none;
