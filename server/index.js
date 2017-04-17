@@ -3,6 +3,11 @@ const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const {Question, User} = require('./models');
+const DATABASE_URL = process.env.DATABASE_URL ||
+                       global.DATABASE_URL || 'mongodb://localhost/repetitiondb';
 
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -100,9 +105,15 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 let server;
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
-        server = app.listen(port, () => {
-            resolve();
-        }).on('error', reject);
+        mongoose.connect(DATABASE_URL, err => {
+            if(err) {
+              return reject(err);
+            }
+            console.log('Db connected');
+            server = app.listen(port, () => {
+              resolve();
+            }).on('error', reject);
+        });
     });
 }
 

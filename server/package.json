@@ -12,7 +12,9 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.14.1",
+    "mongoose": "^4.9.5",
     "passport": "^0.3.2",
     "passport-google-oauth20": "^1.0.0",
     "passport-http-bearer": "^1.0.1"
