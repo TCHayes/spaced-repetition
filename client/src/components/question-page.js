@@ -9,6 +9,15 @@ export default class QuestionPage extends React.Component {
         };
     }
 
+    onSubmit(event){
+        event.preventDefault();
+        //Add logic for handling user's answer here
+    }
+
+    logout(event){
+        Cookies.remove('accessToken');
+    }
+
     componentDidMount() {
         const accessToken = Cookies.get('accessToken');
         fetch('/api/questions', {
@@ -29,13 +38,40 @@ export default class QuestionPage extends React.Component {
 
     render() {
         const questions = this.state.questions.map((question, index) =>
-            <li key={index}>{question}</li>
+            <li key={index}>
+              {question.atomic}<br />
+              {question.letters}
+            </li>
+        );
+
+        const answers = this.state.questions.map((question, index) =>
+            <li key={index}>{question.name}</li>
         );
 
         return (
+          <div className='question-container'>
+            <div className="user-info">
+              <h3>USERNAME & PIC HERE</h3>
+              {/*Log out will need to use ReactRouter to redirect user via
+                browserHistory.replace('/login')*/}
+              <button className='logout' onClick={this.logout}>Logout</button>
+            </div>
             <ul className="question-list">
                 {questions}
             </ul>
+            <form onSubmit={this.onSubmit}>
+                <input type='text' ref={ref => this.userAnswer = ref} placeholder="Your answer"></input>
+            </form>
+            <ul className='answer-list'>
+                {answers}
+            </ul>
+            <div className='answer-feedback'>
+                {/*Display Correct or False based on the user's input */}
+            </div>
+            <div className='scoreboard'>
+                {/*Display user's current score */}
+            </div>
+          </div>
         );
     }
 }
