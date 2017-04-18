@@ -1,4 +1,5 @@
-//import * as Cookies from 'js-cookie';
+import * as Cookies from 'js-cookie';
+import { browserHistory } from 'react-router';
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = (user) => ({
@@ -14,36 +15,24 @@ export const fetchUserFailure = (error) => ({
     error,
 });
 
-export const fetchUser = (userId) => dispatch => {
-    //const accessToken = Cookies.get('accessToken');
-    return fetch(`/api/users/${userId}`).then(response => {
+export const fetchUser = () => dispatch => {
+    const accessToken = Cookies.get('accessToken');
+    return fetch(`/api/me`, {
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+    }).then(response => {
         if (!response.ok) {
+            Cookies.remove('accessToken');
+            browserHistory.replace('/login');
             throw new Error(response.statusText);
         }
         return response.json();
     })
-    .then(data => {
-        dispatch(fetchUserSuccess(data));
+    .then(user => {
+        dispatch(fetchUserSuccess(user));
     })
     .catch(error => {
         dispatch(fetchUserFailure(error));
     })
 }
-
-// export const fetchQuestions = () => dispatch => {
-//
-//   return fetch('/api/questions', {
-//           headers: {
-//               'Authorization': `Bearer ${accessToken}`
-//           }
-//       }).then(res => {
-//         if (!res.ok) {
-//             throw new Error(res.statusText);
-//         }
-//         return res.json();
-//       }).then(questions => {
-//         dispatch(fetchQuestionsSuccess(questions));
-//       }).catch(error => {
-//         dispatch(fetchQuestionsFailure(error));
-//       });
-// }
