@@ -10,13 +10,13 @@ const userSchema = new mongoose.Schema( {
 
 })
 
-userSchema.methods.apiRepr = function() {
-  return {
-    name: this.name,
-    profilePicUrl: this.profilePicUrl,
-    questions: this.question
-  };
-}
+// userSchema.methods.apiRepr = function() {
+//   return {
+//     name: this.name,
+//     profilePicUrl: this.profilePicUrl,
+//     questions: this.question
+//   };
+// }
 
 const questionSchema = new mongoose.Schema({
   letters: {type: String, required: true},
