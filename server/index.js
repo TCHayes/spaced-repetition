@@ -103,12 +103,10 @@ app.get('/api/auth/logout', (req, res) => {
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => {
-      //console.log(`req.user =====` + req.user)
       User
-      .findOne({'googleId': '105098719649992369951'})
+      .findOne({'googleId': req.user[0].googleId}) //how is req.user an array?
       .exec()
       .then(user => {
-        console.log(user)
         res.json(user)
       })
       .catch(console.error)
