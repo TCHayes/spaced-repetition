@@ -3,6 +3,7 @@ const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+const GitHubStrategy = require('passport-github').Strategy;
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const {Question, User} = require('./models');
@@ -14,8 +15,10 @@ let secret = {
   CLIENT_SECRET: process.env.CLIENT_SECRET
 }
 
+
 if(process.env.NODE_ENV != 'production') {
   secret = require('./secret');
+
 }
 
 const app = express();
@@ -54,6 +57,36 @@ passport.use(
     }
 ));
 
+passport.use(
+    new GitHubStrategy({
+        clientID: '0b30838db97c66de76e2',
+        clientSecret:'b567ce6603c0c5b7fc3675ceca07c3741835d3fa',
+        callbackURL: `/api/auth/github/callback`
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(accessToken, "this is a github accesstoken")
+      User
+      .find({githubId: profile.id})
+      .then(user => {
+        if(user) {
+          return cb(null, {githubId: profile.id, accessToken: accessToken})
+        }
+        return (
+          User
+          .create({
+            name: profile.displayName,
+            githubId: profile.id,
+            accessToken,
+            githubProfilePic: profile.photos[0].value,
+            scores: []
+          })
+        )
+      })
+      .then(user => cb(null, {githubId: profile.id,accessToken: accessToken}))
+      .catch(err => cb(err))
+  }
+));
+
 
 passport.use(
     new BearerStrategy(
@@ -67,6 +100,27 @@ passport.use(
     )
  })
 );
+
+app.get('/api/auth/github',
+    passport.authenticate('github', {scope: ['profile']}));
+
+app.get('/api/auth/github/callback',
+    passport.authenticate('github', {
+        failureRedirect: '/',
+        session: false
+    }),
+    (req, res) => {
+        res.cookie('accessToken', req.user.accessToken, {expires: 0});
+        res.redirect('/');
+    }
+);
+
+app.get('/api/auth/logout', (req, res) => {
+    req.logout();
+    res.clearCookie('accessToken');
+    res.redirect('/');
+});
+
 
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));

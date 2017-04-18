@@ -2,9 +2,11 @@ const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema( {
 
-  name: {type: String, required: true},
-  googleId: {type: String, required: true},
-  accessToken: {type: String, required: true},
+  name: String,
+  googleId: String,
+  githubId: String,
+  githubProfilePic: String,
+  accessToken: String,
   profilePicUrl: String,
   scores: Array
 
