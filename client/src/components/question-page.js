@@ -23,22 +23,7 @@ export class QuestionPage extends React.Component {
     }
 
     componentDidMount() {
-        //const accessToken = Cookies.get('accessToken');
-        this.props.dispatch(actions.fetchUser(114407245338993960249));
-        // fetch('/api/questions', {
-        //         headers: {
-        //             'Authorization': `Bearer ${accessToken}`
-        //         }
-        //     }).then(res => {
-        //     if (!res.ok) {
-        //         throw new Error(res.statusText);
-        //     }
-        //     return res.json();
-        // }).then(questions =>
-        //     this.setState({
-        //         questions
-        //     })
-        // );
+        this.props.dispatch(actions.fetchUser());
     }
 
     render() {
@@ -57,8 +42,6 @@ export class QuestionPage extends React.Component {
           <div className='question-container'>
             <div className="user-info">
               <h3>USERNAME & PIC HERE</h3>
-              {/*Log out will need to use ReactRouter to redirect user via
-                browserHistory.replace('/login')*/}
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
             <ul className="question-list">
