@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import QuestionCard from './question-card';
 
 const mapStateToProps = (state, props) => ({
-    question: state.question
+    question: state.question,
+    name: state.name,
 })
 
 export class QuestionPage extends React.Component {
@@ -39,14 +40,14 @@ export class QuestionPage extends React.Component {
         return (
           <div className='question-container'>
             <div className="user-info">
-              <h3>USERNAME & PIC HERE</h3>
+              <h3>{this.props.name}</h3>
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
             <QuestionCard letters={this.props.question.letters}
                           atomic={this.props.question.atomic} />
             <form onSubmit={this.onSubmit}>
                 <input type='text' ref={ref => this.userAnswer = ref}
-                            placeholder="Answer Here!"></input>
+                            placeholder="Type the element name here!"></input>
             </form>
             <div className='answer-feedback'>
                 {/*Display Correct or False based on the user's input */}
