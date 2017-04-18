@@ -15,9 +15,6 @@ export default function LoginPage() {
        <button className="loginBtn loginBtn--google">
         <a href={'/api/auth/google'}>Login with Google</a>
        </button>
-       <button className="btn-auth btn-github large">
-        <a href={'/api/auth/github'}>Login with Github</a>
-       </button>
       </div>
     )
 }

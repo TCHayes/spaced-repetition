@@ -4,13 +4,9 @@ const userSchema = new mongoose.Schema( {
 
   name: String,
   googleId: String,
-  githubId: String,
-  githubProfilePic: String,
   accessToken: String,
   profilePicUrl: String,
   scores: Array
-
-
 
 })
 
