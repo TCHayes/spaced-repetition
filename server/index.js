@@ -91,6 +91,14 @@ app.get('/api/auth/logout', (req, res) => {
 
 app.get('/api/profiles/:userId')
 
+app.get('/api/users/:userId', (req, res) => {
+  User
+  .find({googleId: req.userId})
+  .exec()
+  .then(data => res.json(data))
+  .catch(console.error)
+})
+
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json({
