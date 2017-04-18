@@ -3,18 +3,30 @@ import * as Cookies from 'js-cookie';
 import { browserHistory } from 'react-router';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
+import QuestionCard from './question-card';
+
+const mapStateToProps = (state, props) => ({
+    question: state.question
+})
 
 export class QuestionPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            questions: []
-        };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         questions: []
+    //     };
+    // }
+
+    componentDidMount() {
+        this.props.dispatch(actions.fetchUser());
+        this.props.dispatch(actions.fetchQuestion());
     }
 
     onSubmit(event){
         event.preventDefault();
         //Add logic for handling user's answer here
+        //check if answer equals question.answer
+        //display correct answer
     }
 
     logout(event){
@@ -22,21 +34,7 @@ export class QuestionPage extends React.Component {
         browserHistory.replace('/login');
     }
 
-    componentDidMount() {
-        this.props.dispatch(actions.fetchUser());
-    }
-
     render() {
-        const questions = this.state.questions.map((question, index) =>
-            <li key={index}>
-              {question.atomic}<br />
-              {question.letters}
-            </li>
-        );
-
-        const answers = this.state.questions.map((question, index) =>
-            <li key={index}>{question.name}</li>
-        );
 
         return (
           <div className='question-container'>
@@ -44,16 +42,12 @@ export class QuestionPage extends React.Component {
               <h3>USERNAME & PIC HERE</h3>
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
-            <ul className="question-list">
-                {questions}
-            </ul>
+            <QuestionCard letters={this.props.question.letters}
+                          atomic={this.props.question.atomic} />
             <form onSubmit={this.onSubmit}>
                 <input type='text' ref={ref => this.userAnswer = ref}
                             placeholder="Answer Here!"></input>
             </form>
-            <ul className='answer-list'>
-                {answers}
-            </ul>
             <div className='answer-feedback'>
                 {/*Display Correct or False based on the user's input */}
             </div>
@@ -66,4 +60,4 @@ export class QuestionPage extends React.Component {
 }
 
 
-export default connect()(QuestionPage);
+export default connect(mapStateToProps)(QuestionPage);
