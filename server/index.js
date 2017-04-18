@@ -113,12 +113,17 @@ app.get('/api/me',
     }
 );
 
-app.get('/api/questions',
-    passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json(
-      [{letters:'H', name:'Hydrogen', atomic: 1},
-      {letters:'He', name:'Helium', atomic: 2}])
-);
+app.get('/api/question',
+  passport.authenticate('bearer', {session: false}),
+  (req, res) => {
+    Question
+    .findOne()
+    .exec()
+    .then(question => {
+      res.json(question)
+    })
+    .catch(console.error)
+})
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
