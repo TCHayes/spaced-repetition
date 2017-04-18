@@ -52,7 +52,7 @@ passport.use(
               googleId: profile.id,
               accessToken,
               profilePicUrl: profile.profilePicUrl,
-              question: questArr,
+              questions: questArr,
             }, (err, user) => {
               console.log(user);
               return cb(err, user);
@@ -98,23 +98,19 @@ app.get('/api/auth/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.get('/api/profiles/:userId')
-
-
-app.get('/api/users/:userId', (req, res) => {
-  User
-  .find({googleId: req.userId})
-  .exec()
-  .then(data => res.json(data))
-  .catch(console.error)
-})
-
-
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json({
-        googleId: req.user.googleId
-    })
+    (req, res) => {
+      //console.log(`req.user =====` + req.user)
+      User
+      .findOne({'googleId': '105098719649992369951'})
+      .exec()
+      .then(user => {
+        console.log(user)
+        res.json(user)
+      })
+      .catch(console.error)
+    }
 );
 
 app.get('/api/questions',
