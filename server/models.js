@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema( {
   googleId: String,
   accessToken: String,
   profilePicUrl: String,
-  questions: Array
+  questions: Array,
 
 })
 
@@ -21,8 +21,15 @@ const userSchema = new mongoose.Schema( {
 const questionSchema = new mongoose.Schema({
   letters: {type: String, required: true},
   name: {type: String, required: true},
-  atomic: {type: Number, required: true}
+  atomic: {type: Number, required: true},
 })
+
+questionSchema.methods.apiRepr = function() {
+  return {
+    letters: this.letters,
+    atomic: this.atomic,
+  }
+}
 
 const User = mongoose.model('User', userSchema);
 const Question = mongoose.model('Question', questionSchema);
