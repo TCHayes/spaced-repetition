@@ -9,6 +9,8 @@ const {Question, User, gitHubUser} = require('./models');
 const DATABASE_URL = process.env.DATABASE_URL ||
                        global.DATABASE_URL || 'mongodb://localhost/repetitiondb';
 
+mongoose.Promise = global.Promise;
+
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET
