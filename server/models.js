@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema( {
   googleId: String,
   accessToken: String,
   profilePicUrl: String,
-  scores: Array
+  question: Array
 
 })
 
@@ -14,7 +14,7 @@ userSchema.methods.apiRepr = function() {
   return {
     name: this.name,
     profilePicUrl: this.profilePicUrl,
-    scores: this.scores
+    question: this.question
   };
 }
 

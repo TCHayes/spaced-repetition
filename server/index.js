@@ -34,28 +34,37 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-        User
-        .find({googleId: profile.id})
-        .then(user => {
-          if(user) {
-            return cb(null, {googleId: profile.id, accessToken: accessToken})
-          }
-          return (
-            User
-            .create({
+      User.find({ googleId: profile.id }, (err, user) => {
+        if (!user.length) {
+         const questArr = [];
+         Question.find((err, questions) => {
+          questions.forEach((question) => {
+           questArr.push({
+            questionId: question._id,
+            letters: question.letters,
+            name: question.name,
+            atomic: question.atomic,
+            mValue: 1,
+            });
+          });
+            User.create({
               name: profile.displayName,
               googleId: profile.id,
               accessToken,
               profilePicUrl: profile.profilePicUrl,
-              scores: []
-            })
-          )
-        })
-        .then(user => cb(null, {googleId: profile.id,accessToken: accessToken}))
-        .catch(err => cb(err))
+              question: questArr,
+            }, (err, user) => {
+              console.log(user);
+              return cb(err, user);
+            });
+          });
+        }
+        else {
+          return cb(err, user[0]);
+        }
+      });
     }
-));
-
+  ));
 passport.use(
     new BearerStrategy(
         (token, done) => {
@@ -91,6 +100,7 @@ app.get('/api/auth/logout', (req, res) => {
 
 app.get('/api/profiles/:userId')
 
+
 app.get('/api/users/:userId', (req, res) => {
   User
   .find({googleId: req.userId})
@@ -98,6 +108,7 @@ app.get('/api/users/:userId', (req, res) => {
   .then(data => res.json(data))
   .catch(console.error)
 })
+
 
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
