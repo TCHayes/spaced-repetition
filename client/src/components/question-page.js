@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
+import { browserHistory } from 'react-router';
 
 export default class QuestionPage extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export default class QuestionPage extends React.Component {
 
     logout(event){
         Cookies.remove('accessToken');
+        browserHistory.replace('/login');
     }
 
     componentDidMount() {
@@ -60,7 +62,8 @@ export default class QuestionPage extends React.Component {
                 {questions}
             </ul>
             <form onSubmit={this.onSubmit}>
-                <input type='text' ref={ref => this.userAnswer = ref} placeholder="Your answer"></input>
+                <input type='text' ref={ref => this.userAnswer = ref}
+                            placeholder="Answer Here!"></input>
             </form>
             <ul className='answer-list'>
                 {answers}
