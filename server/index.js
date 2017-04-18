@@ -54,6 +54,7 @@ passport.use(
     }
 ));
 
+
 passport.use(
     new BearerStrategy(
         (token, done) => {
@@ -86,6 +87,8 @@ app.get('/api/auth/logout', (req, res) => {
     res.clearCookie('accessToken');
     res.redirect('/');
 });
+
+app.get('/api/profiles/:userId')
 
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
