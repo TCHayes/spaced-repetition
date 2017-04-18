@@ -1,8 +1,8 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
-
-import QuestionPage from './question-page';
-import LoginPage from './login-page';
+import { browserHistory } from 'react-router';
+// import QuestionPage from './question-page';
+// import LoginPage from './login-page';
 
 class App extends React.Component {
     constructor(props) {
@@ -26,6 +26,7 @@ class App extends React.Component {
                         // Unauthorized, clear the cookie and go to
                         // the login page
                         Cookies.remove('accessToken');
+                        browserHistory.replace('/login');
                         return;
                     }
                     throw new Error(res.statusText);
@@ -40,11 +41,11 @@ class App extends React.Component {
     }
 
     render() {
-        if (!this.state.currentUser) {
-            return <LoginPage />;
-        }
-
-        return <QuestionPage />;
+        return (
+          <div>
+            {this.props.children}
+          </div>
+        );
     }
 }
 
