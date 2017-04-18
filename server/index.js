@@ -120,7 +120,7 @@ app.get('/api/question',
     .findOne()
     .exec()
     .then(question => {
-      res.json(question)
+      res.json(question.apiRepr());
     })
     .catch(console.error)
 })
