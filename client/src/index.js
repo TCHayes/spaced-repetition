@@ -7,9 +7,12 @@ import LoginPage from './components/login-page';
 import './index.css';
 import './login.css';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-// import {createStore, applyMiddleware} from 'redux';
-// import thunk from 'redux-thunk';
-// import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import reducer from './reducers';
+import thunk from 'redux-thunk';
+import {Provider} from 'react-redux';
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 
 function checkAuth() {
   const accessToken = Cookies.get('accessToken');
@@ -28,8 +31,8 @@ const routes = (
 );
 
 ReactDOM.render(
-  <div>
+  <Provider store={store}>
     {routes}
-  </div>,
+  </Provider>,
   document.getElementById('root')
 );
