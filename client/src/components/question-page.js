@@ -1,8 +1,10 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
 import { browserHistory } from 'react-router';
+import * as actions from '../actions';
+import { connect } from 'react-redux';
 
-export default class QuestionPage extends React.Component {
+export class QuestionPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,21 +23,22 @@ export default class QuestionPage extends React.Component {
     }
 
     componentDidMount() {
-        const accessToken = Cookies.get('accessToken');
-        fetch('/api/questions', {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            }).then(res => {
-            if (!res.ok) {
-                throw new Error(res.statusText);
-            }
-            return res.json();
-        }).then(questions =>
-            this.setState({
-                questions
-            })
-        );
+        //const accessToken = Cookies.get('accessToken');
+        this.props.dispatch(actions.fetchUser(114407245338993960249));
+        // fetch('/api/questions', {
+        //         headers: {
+        //             'Authorization': `Bearer ${accessToken}`
+        //         }
+        //     }).then(res => {
+        //     if (!res.ok) {
+        //         throw new Error(res.statusText);
+        //     }
+        //     return res.json();
+        // }).then(questions =>
+        //     this.setState({
+        //         questions
+        //     })
+        // );
     }
 
     render() {
@@ -78,3 +81,6 @@ export default class QuestionPage extends React.Component {
         );
     }
 }
+
+
+export default connect()(QuestionPage);
