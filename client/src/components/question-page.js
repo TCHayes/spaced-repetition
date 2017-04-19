@@ -11,12 +11,6 @@ const mapStateToProps = (state, props) => ({
 })
 
 export class QuestionPage extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         questions: []
-    //     };
-    // }
 
     componentDidMount() {
         this.props.dispatch(actions.fetchUser());

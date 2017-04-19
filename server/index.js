@@ -130,36 +130,35 @@ app.put('/api/answer',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
     if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
-      console.log("You're right!")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
-      // const userId = {googleId: req.user[0].googleId}
       User
       .findOneAndUpdate(search, {$inc: {"questions.$.mValue" : 2}}, {new: true})
       .exec()
       .then(user => {
-        res.json(user);
+        res.json({correct: true, answer: currentQuestion.name});
       })
       .catch(console.error)
-      // User
-      // .findOneAndUpdate(userId, {$push {"questions": { $each[], $sort: {mvalue: -1}}})
     }
     else {
-      console.log("You're wrong.")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
       User
       .findOneAndUpdate(search, {$set: {"questions.$.mValue" : 1}}, {new: true})
       .exec()
       .then(user => {
-        res.json(user);
+        res.json({correct: false, answer: currentQuestion.name});
       })
       .catch(console.error)
     }
 })
 
-// //db.students.update(
-//    { _id: 3 },
-//    { $push: { tests: { $each: [ ], $sort: -1 } } }
-// )
+//possible alternate sort outside of API Repr
+// User.findOne({_id: ...}).then(user => {
+//     user.questions[0].nValue = 2
+//     user.questions.sort((a, b) => {return a.nValue > b.nValue})
+//     return user.save();
+//   }).then(user => {
+//     console.log(user)
+//   })
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

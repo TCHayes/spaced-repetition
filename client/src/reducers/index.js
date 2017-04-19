@@ -6,6 +6,8 @@ const initialState = {
   picture: '',
   score: 0,
   error: null,
+  correct: false,
+  answer: ''
 }
 
 export default (state=initialState, action) => {
