@@ -22,6 +22,7 @@ if(process.env.NODE_ENV != 'production') {
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(passport.initialize());
 
 passport.use(
@@ -109,6 +110,8 @@ app.get('/api/me',
     }
 );
 
+let currentQuestion = {};
+
 app.get('/api/question',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
@@ -116,10 +119,21 @@ app.get('/api/question',
     .findOne({ googleId: req.user[0].googleId })
     .exec()
     .then(user => {
-      let question = user.questions[0];
-      res.json({letters: question.letters, atomic: question.atomic});
+      currentQuestion = user.questions[0];
+      res.json({letters: currentQuestion.letters, atomic: currentQuestion.atomic});
     })
     .catch(console.error)
+})
+
+app.post('/api/answer',
+  passport.authenticate('bearer', {session: false}),
+  (req, res) => {
+    if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
+      console.log("You're right!")
+    }
+    else {
+      console.log("You're wrong.")
+    }
 })
 
 // Serve the built client
