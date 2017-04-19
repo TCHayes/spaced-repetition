@@ -9,6 +9,21 @@ const userSchema = new mongoose.Schema( {
   questions: Array,
 
 })
+userSchema.methods.apiRepr = function() {
+   let lowmValue = {mValue: 500}
+   for (var i = 0; i < this.questions.length; i++) {
+     if(this.questions[i].mValue < lowmValue.mValue) {
+       lowmValue = this.questions[i]
+     }
+   }
+   return {
+     letters: lowmValue.letters,
+     atomic: lowmValue.atomic,
+     name: lowmValue.name,
+     questionId: lowmValue.questionId,
+     mValue: lowmValue.mValue
+   }
+}
 
 // userSchema.methods.apiRepr = function() {
 //   return {

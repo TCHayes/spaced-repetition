@@ -119,7 +119,8 @@ app.get('/api/question',
     .findOne({ googleId: req.user[0].googleId })
     .exec()
     .then(user => {
-      currentQuestion = user.questions[0];
+      currentQuestion = user.apiRepr()
+      console.log(currentQuestion)
       res.json({letters: currentQuestion.letters, atomic: currentQuestion.atomic});
     })
     .catch(console.error)
@@ -131,6 +132,7 @@ app.put('/api/answer',
     if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
       console.log("You're right!")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
+      // const userId = {googleId: req.user[0].googleId}
       User
       .findOneAndUpdate(search, {$inc: {"questions.$.mValue" : 2}}, {new: true})
       .exec()
@@ -138,6 +140,8 @@ app.put('/api/answer',
         res.json(user);
       })
       .catch(console.error)
+      // User
+      // .findOneAndUpdate(userId, {$push {"questions": { $each[], $sort: {mvalue: -1}}})
     }
     else {
       console.log("You're wrong.")
@@ -151,6 +155,11 @@ app.put('/api/answer',
       .catch(console.error)
     }
 })
+
+// //db.students.update(
+//    { _id: 3 },
+//    { $push: { tests: { $each: [ ], $sort: -1 } } }
+// )
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
