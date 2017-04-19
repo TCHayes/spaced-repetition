@@ -8,9 +8,17 @@ import QuestionCard from './question-card';
 const mapStateToProps = (state, props) => ({
     question: state.question,
     name: state.name,
+    correct: state.correct,
+    answer: state.answer,
 })
 
 export class QuestionPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+        //this.answered = false; //MOVE THIS TO REDUX STATE AND SET UP ACTION
+    }
 
     componentDidMount() {
         this.props.dispatch(actions.fetchUser());
@@ -19,9 +27,18 @@ export class QuestionPage extends React.Component {
 
     onSubmit(event){
         event.preventDefault();
-        //Add logic for handling user's answer here
-        //check if answer equals question.answer
-        //display correct answer
+        let formData = {
+          answer: this.userAnswer.value
+        }
+        console.log(this.userAnswer.value);
+        //this.answered = true; //MOVE THIS TO REDUX STATE AND SET UP ACTION
+        //this.props.dispatch(actions.submitAnswer(formData)); //this action doesn't yet exist
+    }
+
+    nextQuestion(event){
+        event.preventDefault();
+        console.log('pushed next question');
+        this.props.dispatch(actions.fetchQuestion());
     }
 
     logout(event){
@@ -30,7 +47,7 @@ export class QuestionPage extends React.Component {
     }
 
     render() {
-
+        //let hidden = this.answered ? '' : 'hidden'; //MOVE THIS TO REDUX STATE AND SET UP ACTION
         return (
           <div className='question-container'>
             <div className="user-info">
@@ -43,9 +60,12 @@ export class QuestionPage extends React.Component {
                 <input type='text' ref={ref => this.userAnswer = ref}
                             placeholder="Type the element name here!"></input>
             </form>
-            <div className='answer-feedback'>
+            <div className={`answer-feedback`}>
                 {/*Display Correct or False based on the user's input */}
+                Your answer is: {this.props.correct}<br />
+                The correct answer is: {this.props.answer}
             </div>
+            <button onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
             </div>
