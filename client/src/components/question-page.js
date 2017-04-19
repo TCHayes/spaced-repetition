@@ -32,7 +32,7 @@ export class QuestionPage extends React.Component {
         }
         console.log(this.userAnswer.value);
         //this.answered = true; //MOVE THIS TO REDUX STATE AND SET UP ACTION
-        //this.props.dispatch(actions.submitAnswer(formData)); //this action doesn't yet exist
+        this.props.dispatch(actions.submitAnswer(formData));
     }
 
     nextQuestion(event){
@@ -62,7 +62,7 @@ export class QuestionPage extends React.Component {
             </form>
             <div className={`answer-feedback`}>
                 {/*Display Correct or False based on the user's input */}
-                Your answer is: {this.props.correct}<br />
+                Your answer is: {this.props.correct ? "Correct" : "False"}<br />
                 The correct answer is: {this.props.answer}
             </div>
             <button onClick={this.nextQuestion}>Next Element</button>
