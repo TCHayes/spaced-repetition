@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema( {
 
 })
 userSchema.methods.apiRepr = function() {
-   let lowmValue = {mValue: 500}
+   let lowmValue = {mValue: Infinity}
    for (var i = 0; i < this.questions.length; i++) {
      if(this.questions[i].mValue < lowmValue.mValue) {
        lowmValue = this.questions[i]

@@ -26,6 +26,19 @@ export const fetchQuestionFailure = (error) => ({
     error,
 });
 
+export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
+export const submitAnswerSuccess = (answer) => ({
+    type: SUBMIT_ANSWER_SUCCESS,
+    answer,
+});
+
+export const SUBMIT_ANSWER_FAILURE = 'SUBMIT_ANSWER_FAILURE';
+export const submitAnswerFailure = (error) => ({
+    type: SUBMIT_ANSWER_FAILURE,
+    error,
+});
+
+
 export const fetchUser = () => dispatch => {
     const accessToken = Cookies.get('accessToken');
     return fetch(`/api/me`, {
@@ -69,3 +82,31 @@ export const fetchQuestion = () => dispatch => {
       dispatch(fetchQuestionFailure(error));
   })
 }
+
+export const submitAnswer = (answer) => dispatch => {
+  const accessToken = Cookies.get('accessToken');
+   let init = {
+     method: 'PUT',
+     headers: {
+       Accept: 'application/json',
+       'Content-Type': 'application/json',
+       Authorization: `Bearer ${accessToken}`,
+     },
+     body: JSON.stringify(answer)
+   };
+   return fetch(`api/answer`, init)
+  .then((response) => {
+     if (response.status < 200 || response.status >= 300) {
+       let error = new Error(response.statusText);
+       error.response = response;
+       throw error;
+     }
+       return response.json();
+   })
+ .then((answer) => {
+    dispatch(submitAnswerSuccess(answer));
+   })
+ .catch((error) => {
+    dispatch(submitAnswerFailure(error));
+   })
+ };

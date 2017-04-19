@@ -130,22 +130,24 @@ app.put('/api/answer',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
     if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
+      console.log("You are right")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
       User
-      .findOneAndUpdate(search, {$inc: {"questions.$.mValue" : 2}}, {new: true})
+      .findOneAndUpdate(search, {$mul: {"questions.$.mValue" : 2}}, {new: true})
       .exec()
       .then(user => {
-        res.json({correct: true, answer: currentQuestion.name});
+        res.json({correct: true, actualAnswer: currentQuestion.name});
       })
       .catch(console.error)
     }
     else {
+      console.log("You are Wrong")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
       User
       .findOneAndUpdate(search, {$set: {"questions.$.mValue" : 1}}, {new: true})
       .exec()
       .then(user => {
-        res.json({correct: false, answer: currentQuestion.name});
+        res.json({correct: false, actualAnswer: currentQuestion.name});
       })
       .catch(console.error)
     }
