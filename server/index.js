@@ -125,14 +125,30 @@ app.get('/api/question',
     .catch(console.error)
 })
 
-app.post('/api/answer',
+app.put('/api/answer',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
     if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
       console.log("You're right!")
+      const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
+      User
+      .findOneAndUpdate(search, {$inc: {"questions.$.mValue" : 2}}, {new: true})
+      .exec()
+      .then(user => {
+        res.json(user);
+      })
+      .catch(console.error)
     }
     else {
       console.log("You're wrong.")
+      const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
+      User
+      .findOneAndUpdate(search, {$set: {"questions.$.mValue" : 1}}, {new: true})
+      .exec()
+      .then(user => {
+        res.json(user);
+      })
+      .catch(console.error)
     }
 })
 
