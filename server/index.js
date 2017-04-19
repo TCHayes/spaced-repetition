@@ -16,16 +16,11 @@ let secret = {
   CLIENT_SECRET: process.env.CLIENT_SECRET
 }
 
-
 if(process.env.NODE_ENV != 'production') {
   secret = require('./secret');
-
 }
 
 const app = express();
-
-const database = {
-};
 
 app.use(passport.initialize());
 
@@ -67,6 +62,7 @@ passport.use(
       });
     }
   ));
+
 passport.use(
     new BearerStrategy(
         (token, done) => {
@@ -116,11 +112,12 @@ app.get('/api/me',
 app.get('/api/question',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
-    Question
-    .findOne()
+    User
+    .findOne({ googleId: req.user[0].googleId })
     .exec()
-    .then(question => {
-      res.json(question.apiRepr());
+    .then(user => {
+      let question = user.questions[0];
+      res.json({letters: question.letters, atomic: question.atomic});
     })
     .catch(console.error)
 })
