@@ -10,6 +10,9 @@ const mapStateToProps = (state, props) => ({
     name: state.name,
     correct: state.correct,
     answer: state.answer,
+    answered: state.answered,
+    score: state.score,
+    negScore: state.negScore,
 })
 
 export class QuestionPage extends React.Component {
@@ -17,7 +20,6 @@ export class QuestionPage extends React.Component {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
-        //this.answered = false; //MOVE THIS TO REDUX STATE AND SET UP ACTION
     }
 
     componentDidMount() {
@@ -31,7 +33,6 @@ export class QuestionPage extends React.Component {
           answer: this.userAnswer.value
         }
         console.log(this.userAnswer.value);
-        //this.answered = true; //MOVE THIS TO REDUX STATE AND SET UP ACTION
         this.props.dispatch(actions.submitAnswer(formData));
     }
 
@@ -47,7 +48,7 @@ export class QuestionPage extends React.Component {
     }
 
     render() {
-        //let hidden = this.answered ? '' : 'hidden'; //MOVE THIS TO REDUX STATE AND SET UP ACTION
+        let hidden = this.props.answered ? '' : 'hidden';
         return (
           <div className='question-container'>
             <div className="user-info">
@@ -61,13 +62,16 @@ export class QuestionPage extends React.Component {
                             placeholder="Type the element name here!"></input>
             </form>
             <button className = "next-button" onClick={this.nextQuestion}>Next Element</button>
-            <div className={`answer-feedback`}>
+            <div className={`answer-feedback ${hidden}`}>
                 {/*Display Correct or False based on the user's input */}
                 Your answer is: {this.props.correct ? "Correct" : "False"}<br />
                 The correct answer is: {this.props.answer}
             </div>
             <div className='scoreboard'>
                 {/*Display user's current score */}
+                Score this session<br />
+                Correct: {this.props.score}<br />
+                Incorrect: {this.props.negScore}
             </div>
           </div>
         );
