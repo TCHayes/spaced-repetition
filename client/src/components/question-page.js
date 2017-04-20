@@ -59,7 +59,7 @@ export class QuestionPage extends React.Component {
                 <input type='text' ref={ref => this.userAnswer = ref}
                             placeholder="Type the element name here!"></input>
             </form>
-            <div className={`answer-feedback`}>
+            <div className={`answer-feedback ${hidden}`}>
                 {/*Display Correct or False based on the user's input */}
                 Your answer is: {this.props.correct ? "Correct" : "False"}<br />
                 The correct answer is: {this.props.answer}
