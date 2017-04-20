@@ -58,8 +58,9 @@ export class QuestionPage extends React.Component {
             <QuestionCard letters={this.props.question.letters}
                           atomic={this.props.question.atomic} />
             <form onSubmit={this.onSubmit}>
-                <input type='text' ref={ref => this.userAnswer = ref}
-                            placeholder="Type the element name here!"></input>
+                <input type='text' id='user-answer'
+                        ref={ref => this.userAnswer = ref}
+                        placeholder="Guess Element"></input>
                 <button type='submit' className='' disabled={this.props.answered}>Submit</button>
             </form>
             <button className = "next-button" onClick={this.nextQuestion}>Next Element</button>
