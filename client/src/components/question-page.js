@@ -69,6 +69,7 @@ export class QuestionPage extends React.Component {
                 <input type='text' id='user-answer'
                         ref={ref => this.userAnswer = ref}
                         placeholder="Guess Element"
+                        disabled={this.props.answered}
                         autoFocus></input>
                 <button type='submit' className={`btn submit-btn ${hideSubmit}`}
                                 disabled={this.props.answered}>Submit</button>
