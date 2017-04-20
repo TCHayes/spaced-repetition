@@ -10,6 +10,7 @@ const mapStateToProps = (state, props) => ({
     name: state.name,
     correct: state.correct,
     answer: state.answer,
+    answered: state.answered,
 })
 
 export class QuestionPage extends React.Component {
@@ -17,7 +18,6 @@ export class QuestionPage extends React.Component {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
-        //this.answered = false; //MOVE THIS TO REDUX STATE AND SET UP ACTION
     }
 
     componentDidMount() {
@@ -31,7 +31,6 @@ export class QuestionPage extends React.Component {
           answer: this.userAnswer.value
         }
         console.log(this.userAnswer.value);
-        //this.answered = true; //MOVE THIS TO REDUX STATE AND SET UP ACTION
         this.props.dispatch(actions.submitAnswer(formData));
     }
 
@@ -47,7 +46,7 @@ export class QuestionPage extends React.Component {
     }
 
     render() {
-        //let hidden = this.answered ? '' : 'hidden'; //MOVE THIS TO REDUX STATE AND SET UP ACTION
+        let hidden = this.props.answered ? '' : 'hidden';
         return (
           <div className='question-container'>
             <div className="user-info">

@@ -7,7 +7,8 @@ const initialState = {
   score: 0,
   error: null,
   correct: false,
-  answer: ''
+  answer: '',
+  answered: false,
 }
 
 export default (state=initialState, action) => {
@@ -29,7 +30,7 @@ export default (state=initialState, action) => {
   }
   if(action.type === actions.SUBMIT_ANSWER_SUCCESS) {
     return {...state, correct: action.answer.correct,
-      answer: action.answer.actualAnswer}
+      answer: action.answer.actualAnswer, answered: true}
   }
   if(action.type === actions.SUBMIT_ANSWER_FAILURE) {
     return{...state, error: action.error}
