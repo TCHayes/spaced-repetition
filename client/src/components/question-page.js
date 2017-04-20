@@ -34,6 +34,7 @@ export class QuestionPage extends React.Component {
         }
         console.log(this.userAnswer.value);
         this.props.dispatch(actions.submitAnswer(formData));
+        document.getElementById("input-form").reset();
     }
 
     nextQuestion(event){
@@ -49,6 +50,7 @@ export class QuestionPage extends React.Component {
 
     render() {
         let hidden = this.props.answered ? '' : 'hidden';
+        let hideSubmit = this.props.answered ? 'hidden' : '';
         return (
           <div className='question-container'>
             <div className="user-info">
@@ -63,13 +65,15 @@ export class QuestionPage extends React.Component {
                           atomic={this.props.question.atomic}
                           answer={this.props.answer}
                           hidden={hidden} />
-            <form onSubmit={this.onSubmit}>
+            <form id="input-form" onSubmit={this.onSubmit}>
                 <input type='text' id='user-answer'
                         ref={ref => this.userAnswer = ref}
-                        placeholder="Guess Element"></input>
-                <button type='submit' className='' disabled={this.props.answered}>Submit</button>
+                        placeholder="Guess Element"
+                        autoFocus></input>
+                <button type='submit' className={`btn submit-btn ${hideSubmit}`}
+                                disabled={this.props.answered}>Submit</button>
             </form>
-            <button className = "next-button" onClick={this.nextQuestion}>Next Element</button>
+            <button className={`btn next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
                 Score this session<br />
