@@ -60,6 +60,7 @@ export class QuestionPage extends React.Component {
             <form onSubmit={this.onSubmit}>
                 <input type='text' ref={ref => this.userAnswer = ref}
                             placeholder="Type the element name here!"></input>
+                <button type='submit' className='' disabled={this.props.answered}>Submit</button>
             </form>
             <button className = "next-button" onClick={this.nextQuestion}>Next Element</button>
             <div className={`answer-feedback ${hidden}`}>

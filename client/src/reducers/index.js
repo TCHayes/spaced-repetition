@@ -24,7 +24,7 @@ export default (state=initialState, action) => {
     return {...state, error: action.error}
   }
   if (action.type === actions.FETCH_QUESTION_SUCCESS){
-    return {...state, question: action.question}
+    return {...state, question: action.question, answered:false}
   }
   if (action.type === actions.FETCH_QUESTION_FAILURE){
     return {...state, error: action.error}
