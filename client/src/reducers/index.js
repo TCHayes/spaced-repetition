@@ -5,6 +5,7 @@ const initialState = {
   name: '',
   picture: '',
   score: 0,
+  negScore: 0,
   error: null,
   correct: false,
   answer: '',
@@ -28,11 +29,17 @@ export default (state=initialState, action) => {
   if (action.type === actions.FETCH_QUESTION_FAILURE){
     return {...state, error: action.error}
   }
-  if(action.type === actions.SUBMIT_ANSWER_SUCCESS) {
-    return {...state, correct: action.answer.correct,
-      answer: action.answer.actualAnswer, answered: true}
+  if (action.type === actions.SUBMIT_ANSWER_SUCCESS) {
+    if (action.answer.correct) {
+      return {...state, correct: action.answer.correct, score: state.score+1,
+        answer: action.answer.actualAnswer, answered: true}
+    }
+    else {
+      return {...state, correct: action.answer.correct, negScore: state.negScore+1,
+        answer: action.answer.actualAnswer, answered: true}
+    }
   }
-  if(action.type === actions.SUBMIT_ANSWER_FAILURE) {
+  if (action.type === actions.SUBMIT_ANSWER_FAILURE) {
     return{...state, error: action.error}
   }
   return state;

@@ -11,6 +11,8 @@ const mapStateToProps = (state, props) => ({
     correct: state.correct,
     answer: state.answer,
     answered: state.answered,
+    score: state.score,
+    negScore: state.negScore,
 })
 
 export class QuestionPage extends React.Component {
@@ -67,6 +69,9 @@ export class QuestionPage extends React.Component {
             <button onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
+                Score this session<br />
+                Correct: {this.props.score}<br />
+                Incorrect: {this.props.negScore}
             </div>
           </div>
         );
