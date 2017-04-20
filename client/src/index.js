@@ -6,6 +6,7 @@ import QuestionPage from './components/question-page';
 import LoginPage from './components/login-page';
 import './index.css';
 import './login.css';
+import './questions.css';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducers';

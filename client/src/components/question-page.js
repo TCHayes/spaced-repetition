@@ -60,12 +60,12 @@ export class QuestionPage extends React.Component {
                 <input type='text' ref={ref => this.userAnswer = ref}
                             placeholder="Type the element name here!"></input>
             </form>
+            <button className = "next-button" onClick={this.nextQuestion}>Next Element</button>
             <div className={`answer-feedback`}>
                 {/*Display Correct or False based on the user's input */}
                 Your answer is: {this.props.correct ? "Correct" : "False"}<br />
                 The correct answer is: {this.props.answer}
             </div>
-            <button onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
             </div>
