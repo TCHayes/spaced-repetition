@@ -55,19 +55,20 @@ export class QuestionPage extends React.Component {
               <h3>{this.props.name}</h3>
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
+            <div className={`answer-feedback ${hidden}`}>
+                {/*Display Correct or False based on the user's input */}
+                {this.props.correct ? "Correct" : "False"}<br />
+            </div>
             <QuestionCard letters={this.props.question.letters}
-                          atomic={this.props.question.atomic} />
+                          atomic={this.props.question.atomic}
+                          answer={this.props.answer}
+                          hidden={hidden} />
             <form onSubmit={this.onSubmit}>
                 <input type='text' ref={ref => this.userAnswer = ref}
                             placeholder="Type the element name here!"></input>
                 <button type='submit' className='' disabled={this.props.answered}>Submit</button>
             </form>
             <button className = "next-button" onClick={this.nextQuestion}>Next Element</button>
-            <div className={`answer-feedback ${hidden}`}>
-                {/*Display Correct or False based on the user's input */}
-                Your answer is: {this.props.correct ? "Correct" : "False"}<br />
-                The correct answer is: {this.props.answer}
-            </div>
             <div className='scoreboard'>
                 {/*Display user's current score */}
                 Score this session<br />

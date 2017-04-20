@@ -12,6 +12,9 @@ export default function QuestionCard(props) {
       <div className='symbol-div'>
         <span className='symbol'>{props.letters}</span><br />
       </div>
+      <div className={`answer-div ${props.hidden}`}>
+        <span className="answer">{props.answer}</span><br />
+      </div>
       </div>
 
     )
