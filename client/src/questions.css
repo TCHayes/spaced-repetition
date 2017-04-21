@@ -1,3 +1,6 @@
+@import url('./webfontkit/stylesheet.css');
+@import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
+
 .question-container {
   display: flex;
   flex-direction: column;
@@ -110,6 +113,7 @@ form{
 
 
 #user-answer {
+  font-family: 'pigment_demoregular';
   width: 180px;
   height: 55px;
   background-color: #1f4524;
