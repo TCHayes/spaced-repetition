@@ -15,7 +15,7 @@
   align-self: center;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 35px;
   background:green;
   border:3px solid #fff;
   width:210px;
@@ -28,7 +28,7 @@ form{
   display: flex;
   flex-direction: column;
   align-self: center;
-  margin-top: 80px;
+  margin-top: 55px;
   width: 216px;
 }
 
@@ -179,5 +179,5 @@ form{
   align-self: center;
   text-align: center;
   margin-top: 10px;
-  font-size: 26px;
+  font-size: 24px;
 }
