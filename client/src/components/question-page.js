@@ -8,6 +8,7 @@ import QuestionCard from './question-card';
 const mapStateToProps = (state, props) => ({
     question: state.question,
     name: state.name,
+    picture: state.picture,
     correct: state.correct,
     answer: state.answer,
     answered: state.answered,
