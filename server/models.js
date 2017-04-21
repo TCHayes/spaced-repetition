@@ -1,37 +1,28 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema( {
-
   name: String,
   googleId: String,
   accessToken: String,
   profilePicUrl: String,
   questions: Array,
-
 })
-userSchema.methods.apiRepr = function() {
-   let lowmValue = {mValue: Infinity}
-   for (var i = 0; i < this.questions.length; i++) {
-     if(this.questions[i].mValue < lowmValue.mValue) {
-       lowmValue = this.questions[i]
-     }
-   }
-   return {
-     letters: lowmValue.letters,
-     atomic: lowmValue.atomic,
-     name: lowmValue.name,
-     questionId: lowmValue.questionId,
-     mValue: lowmValue.mValue
-   }
-}
 
-// userSchema.methods.apiRepr = function() {
-//   return {
-//     name: this.name,
-//     profilePicUrl: this.profilePicUrl,
-//     questions: this.question
-//   };
-// }
+userSchema.methods.apiRepr = function(name) {
+  let lowmValue = {mValue: Infinity}
+  for (let i = 0; i < this.questions.length; i++) {
+    if((this.questions[i].mValue < lowmValue.mValue) && (this.questions[i].name != name)) {
+      lowmValue = this.questions[i]
+    }
+  }
+  return {
+    letters: lowmValue.letters,
+    atomic: lowmValue.atomic,
+    name: lowmValue.name,
+    questionId: lowmValue.questionId,
+    mValue: lowmValue.mValue,
+  }
+}
 
 const questionSchema = new mongoose.Schema({
   letters: {type: String, required: true},

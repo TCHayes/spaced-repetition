@@ -110,7 +110,7 @@ app.get('/api/me',
     }
 );
 
-let currentQuestion = {};
+const currentQuestionMap = {}
 
 app.get('/api/question',
   passport.authenticate('bearer', {session: false}),
@@ -119,8 +119,14 @@ app.get('/api/question',
     .findOne({ googleId: req.user[0].googleId })
     .exec()
     .then(user => {
-      currentQuestion = user.apiRepr()
-      console.log(currentQuestion)
+      let currentQuestion = {};
+      if (currentQuestionMap.hasOwnProperty(req.user[0].googleId)){
+        currentQuestion = user.apiRepr(currentQuestionMap[req.user[0].googleId].name);
+      }
+      else{
+        currentQuestion = user.apiRepr('Non-existent Element');
+      }
+      currentQuestionMap[req.user[0].googleId] = currentQuestion;
       res.json({letters: currentQuestion.letters, atomic: currentQuestion.atomic});
     })
     .catch(console.error)
@@ -129,6 +135,7 @@ app.get('/api/question',
 app.put('/api/answer',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
+    const currentQuestion = currentQuestionMap[req.user[0].googleId];
     if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
       console.log("You are right")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
