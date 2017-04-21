@@ -1,99 +1,66 @@
-# Space Repetition Starter Kit
+# Periodic Repetition
+## A simple way to learn the periodic table of elements using a spaced repetition algorithm
 
-This should get you started with your Spaced Repetition app. We're giving you your basic directory structure, and the framework for authentication. However, we aren't persisting any information, and it will be your job to add Mongo/Mongoose. There are helpful comments in `server/index.js`.
+### Overview
 
-In development, the starter kit runs two servers. One of which is from `create-react-app`, so you get all the fancy hot reloading, etc, the other is the backend. In production, we generate a static folder with all our React stuff, and serve that with Express.
+The <a href ='http://cryptic-shore-50871.herokuapp.com/'>Periodic Repetition</a> app provides easy learning of the periodic table of elements
+by implementing spaced repetition. Spaced repetition is a learning technique
+that incorporates increasing intervals of time between subsequent review of
+previously learned material in order to exploit the psychological "spacing effect".
+Essentially learning happens in spaced repetition much like flash cards. The information
+that you are more familiar with is pushed to the back of the flash card stack, while
+the information you are unfamiliar stays at the front so you repeatedly see it more times,
+therefore increasing learning.
 
-## Getting started
+In this application we decided to apply these same principles of spaced repetition
+to help students learn the periodic table of elements.
 
-First, fork the repo on Github to your own account
-
-### Clone the repo
-
-```sh
-$ git clone https://github.com/YOUR_USERNAME_HERE/spaced-repetition-starter
+## Installation
+```
+>   git clone https://github.com/TCHayes/spaced-repetition.git
+>   cd spaced-repetition
+>   npm install
 ```
 
-```sh
-$ cd spaced-repetition-starter
+### Launching
 ```
-
-```sh
-$ npm install
+>   npm run dev
 ```
-
-You can run it locally now with `npm run dev`, but the Google OAuth stuff won't work without your own credentials.
-
-### Get Google OAuth Credentials
-
-Visit https://console.developers.google.com
-
-* Navigate to Library 
-* Under 'Social APIs', Click 'Google+ API'
-* Click 'Enable' at the top (if it isn't already)
-
-
-* Navigate to Credentials
-* It may require you to configure OAuth consent screen.
-* Click 'Create credentials'
-* Choose 'OAuth Client ID'
-* Choose 'Web application'
-* Add `http://localhost:8080` to Authorized JavaScript origins
-* Add `http://localhost:8080/api/auth/google/callback` to Authorized redirect URIs
-* Click 'Create'
-
-You should get a Client ID and Secret.
-
-Back in your project locally, create an `secret.js` file in the `/server` directory:
-
-(Use the client ID and secret we just got from Google)
-
-```js
-module.exports = {
-  CLIENT_ID: 'yourId123.apps.googleusercontent.com',
-  CLIENT_SECRET: 'yoursecret'
-}
+Then open [`localhost:8000`](http://localhost:8000) in a browser.
+### Testing
 ```
-
-This file is in ignored by git because it is in your `.gitignore`. Never commit or push 'secret.js', the client id and secret need to be kept safe like a password.
-
-### Local Development
-
-```sh
-  npm run dev
+>   npm run test
 ```
+Note on compatibility: The API relies on NodeJS v6.3.1.  All other dependencies are listed in the _package.json_ file. Although the API might run on alternative versions, it has not been tested.
 
-## Deployment to Heroku
+## Design & Functionality
 
-```sh
-$ heroku create
-```
+### Frontend
 
-Configure your Google client id and secret on Heroku:
+The front-end of Periodic Repetition employs the ReactJS framework and Redux store.
+The user is first directed to a login page and asked to register using a Google
+OAuth 2.0 authentication strategy. This allows any google account holder to easily
+register this app and track their own individual progress in learning the elements.
 
-```sh
-$ heroku config:set CLIENT_ID=yourId123.apps.googleusercontent.com CLIENT_SECRET=yoursecret
-```
+Once authenticated, the user is directed to the main page which displays a box
+with the element letters and atomic numbers. The user is then instructed to guess
+the corresponding element to the letter and atomic number. If the user is correct,
+their score will increase. If incorrect, their incorrect score will increase.
+Based upon if the answer is correct or incorrect the algorithm will shuffle the
+questions in appropriate order to provide the spaced repetition learning technique.
 
-(You can also do this on dashboard.heroku.com under your app's settings.)
+### Backend
 
-### To deploy:
+The backend of this app is built on NodeJS using ExpressJS middleware, MongoDB
+and Mongoose ORM. The backend is the engine for this application. It provides
+the Google OAuth 2.0 authentication, the spaced repetition algorithm and also
+stores user progress in MongoDB.
 
-```sh
-$ git push heroku master
-```
-
-Your app should be live on Heroku soon, but if you try to `Log in with Google`, you will get a 400 error. Take note of your new app's URL.
-
-
-#### Updating Google API authorized origins
-
-
-To fix this, go back to the Google API Dashboard and:
-
-(You might need to use `http` and or `http` for your Heroku URIs)
-
-- Add `http://your-app-name-123.herokuapp.com` to Authorized JavaScript origins
-- Add `http://your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorized redirect URIs
-
-Try to log in  `Log in with Google` again, and you're golden!
+## Technology
+* HTML5
+* CSS3
+* JavaScript
+* React
+* Redux
+* jQuery
+* React-Router

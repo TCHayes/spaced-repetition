@@ -77,6 +77,7 @@ form{
   90% { transform: scale(1.5); }
 	100% { transform: scale(1); }
 }
+
 @keyframes pulse_animation2 {
 	0% { transform: scale(1); }
   10% { transform: scale(1.2); }
