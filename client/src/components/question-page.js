@@ -59,7 +59,7 @@ export class QuestionPage extends React.Component {
             </div>
             <div className={`answer-feedback ${hidden}`}>
                 {/*Display Correct or False based on the user's input */}
-                {this.props.correct ? "Correct" : "False"}<br />
+                <h1 className='answer-feedback-text pulse'>{this.props.correct ? "Correct" : "False"}</h1><br />
             </div>
             <QuestionCard letters={this.props.question.letters}
                           atomic={this.props.question.atomic}
@@ -69,6 +69,7 @@ export class QuestionPage extends React.Component {
                 <input type='text' id='user-answer'
                         ref={ref => this.userAnswer = ref}
                         placeholder="Guess Element"
+                        autoComplete={false}
                         autoFocus></input>
                 <button type='submit' className={`btn submit-btn ${hideSubmit}`}
                                 disabled={this.props.answered}>Submit</button>
