@@ -52,7 +52,6 @@ passport.use(
               profilePicUrl: profile._json.image.url,
               questions: questArr,
             }, (err, user) => {
-              console.log(user);
               return cb(err, user);
             });
           });
@@ -137,7 +136,6 @@ app.put('/api/answer',
   (req, res) => {
     const currentQuestion = currentQuestionMap[req.user[0].googleId];
     if (req.body.answer.toLowerCase() === currentQuestion.name.toLowerCase()){
-      console.log("You are right")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
       User
       .findOneAndUpdate(search, {$mul: {"questions.$.mValue" : 2}}, {new: true})
@@ -148,7 +146,6 @@ app.put('/api/answer',
       .catch(console.error)
     }
     else {
-      console.log("You are Wrong")
       const search = {googleId: req.user[0].googleId, "questions.questionId": currentQuestion.questionId}
       User
       .findOneAndUpdate(search, {$set: {"questions.$.mValue" : 1}}, {new: true})
