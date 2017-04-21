@@ -67,7 +67,8 @@ export const fetchQuestion = () => dispatch => {
       headers: {
           'Authorization': `Bearer ${accessToken}`
       }
-  }).then(response => {
+  })
+  .then(response => {
       if (!response.ok) {
           Cookies.remove('accessToken');
           browserHistory.replace('/login');

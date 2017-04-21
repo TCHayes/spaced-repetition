@@ -59,7 +59,7 @@ export class QuestionPage extends React.Component {
             </div>
             <div className={`answer-feedback ${hidden}`}>
                 {/*Display Correct or False based on the user's input */}
-                <h1 className='answer-feedback-text pulse'>{this.props.correct ? "Correct" : "False"}</h1><br />
+                <h1 className='answer-feedback-text pulse'>{this.props.correct ? "Correct" : "Incorrect"}</h1><br />
             </div>
             <QuestionCard letters={this.props.question.letters}
                           atomic={this.props.question.atomic}
@@ -74,12 +74,12 @@ export class QuestionPage extends React.Component {
                 <button type='submit' className={`btn submit-btn ${hideSubmit}`}
                                 disabled={this.props.answered}>Submit</button>
             </form>
-            <button className={`btn next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
+            <button className={`btn pulse2 next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
-                Score this session<br />
-                Correct: {this.props.score}<br />
-                Incorrect: {this.props.negScore}
+                Score <br />
+                Correct  {this.props.score}<br />
+                Incorrect  {this.props.negScore}
             </div>
           </div>
         );
