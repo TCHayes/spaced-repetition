@@ -15,6 +15,10 @@ therefore increasing learning.
 In this application we decided to apply these same principles of spaced repetition
 to help students learn the periodic table of elements.
 
+##Screenshots
+<img src='./client/main-page.png'><img src='./client/login-page.png'>
+
+
 ## Installation
 ```
 >   git clone https://github.com/TCHayes/spaced-repetition.git
