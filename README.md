@@ -26,12 +26,7 @@ to help students learn the periodic table of elements.
 ```
 >   npm run dev
 ```
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
-### Testing
-```
->   npm run test
-```
-Note on compatibility: The API relies on NodeJS v6.3.1.  All other dependencies are listed in the _package.json_ file. Although the API might run on alternative versions, it has not been tested.
+Then open [`localhost:8080`](http://localhost:8080) in a browser.
 
 ## Design & Functionality
 
@@ -62,5 +57,4 @@ stores user progress in MongoDB.
 * JavaScript
 * React
 * Redux
-* jQuery
 * React-Router
