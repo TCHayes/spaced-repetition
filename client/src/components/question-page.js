@@ -33,9 +33,8 @@ export class QuestionPage extends React.Component {
         let formData = {
           answer: this.userAnswer.value
         }
-        console.log(this.userAnswer.value);
         this.props.dispatch(actions.submitAnswer(formData));
-        document.getElementById("input-form").reset();
+        this.answerForm.reset();
     }
 
     nextQuestion(event){
@@ -65,7 +64,7 @@ export class QuestionPage extends React.Component {
             <div className='answer-feedback'>
                 <h1 className={`answer-feedback-text pulse ${hidden}`}>{this.props.correct ? "Correct" : "Incorrect"}</h1><br />
             </div>
-            <form id="input-form" onSubmit={this.onSubmit}>
+            <form id="input-form" onSubmit={this.onSubmit} ref={ref => this.answerForm = ref}>
                 <input type='text' id='user-answer'
                         ref={ref => this.userAnswer = ref}
                         placeholder="Guess Element"
@@ -77,10 +76,9 @@ export class QuestionPage extends React.Component {
             </form>
             <button className={`btn next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
-                {/*Display user's current score */}
                 Score <br />
-                Correct  {this.props.score}<br />
-                Incorrect  {this.props.negScore}
+                Correct:  {this.props.score}<br />
+                Incorrect:  {this.props.negScore}
             </div>
           </div>
         );
