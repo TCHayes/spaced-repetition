@@ -49,7 +49,7 @@ passport.use(
               name: profile.displayName,
               googleId: profile.id,
               accessToken,
-              profilePicUrl: profile.profilePicUrl,
+              profilePicUrl: profile._json.image.url,
               questions: questArr,
             }, (err, user) => {
               console.log(user);
