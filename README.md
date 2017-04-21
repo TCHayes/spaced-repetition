@@ -58,3 +58,11 @@ stores user progress in MongoDB.
 * React
 * Redux
 * React-Router
+
+## Future Features
+* Add additional spellings for certain elements (e.g. Aluminum vs Aluminium, Sulfur vs Sulphur, etc.)
+* Allow users to work on a specific subset of the periodic table during a session (e.g. Noble Gases, Alkali metals, etc).
+* Add colors to element card text to indicate whether the element's natural state is a gas, liquid, solid, or unknown.
+* Add info on elements' natural occurance: primordial, from decay, or synthetic.
+* Long-term storage of data on how many times a user's correctly/incorrectly answered each element.
+  * Add component to display user's full long-term scoreboard
