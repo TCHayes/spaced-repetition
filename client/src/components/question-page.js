@@ -57,14 +57,13 @@ export class QuestionPage extends React.Component {
               <h2>{this.props.name}</h2>
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
-            <div className={`answer-feedback ${hidden}`}>
-                {/*Display Correct or False based on the user's input */}
-                <h1 className='answer-feedback-text pulse'>{this.props.correct ? "Correct" : "Incorrect"}</h1><br />
-            </div>
             <QuestionCard letters={this.props.question.letters}
                           atomic={this.props.question.atomic}
                           answer={this.props.answer}
                           hidden={hidden} />
+            <div className='answer-feedback'>
+                <h1 className={`answer-feedback-text pulse ${hidden}`}>{this.props.correct ? "Correct" : "Incorrect"}</h1><br />
+            </div>
             <form id="input-form" onSubmit={this.onSubmit}>
                 <input type='text' id='user-answer'
                         ref={ref => this.userAnswer = ref}
