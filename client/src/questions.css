@@ -53,8 +53,9 @@ form{
 }
 
 .atomic-div {
-  margin-left: auto;
-  margin-right: 10px;
+ align-self: flex-end;
+ padding-right: 10px;
+
 }
 
 .answer-feedback {
@@ -67,7 +68,6 @@ form{
 .answer-feedback-text {
   position: absolute;
   bottom: 5px;
-
 }
 /* pulse animation for buttons and answer */
 @keyframes pulse_animation {
