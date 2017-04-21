@@ -34,12 +34,11 @@ export class QuestionPage extends React.Component {
           answer: this.userAnswer.value
         }
         this.props.dispatch(actions.submitAnswer(formData));
-        this.answerForm.reset();
     }
 
     nextQuestion(event){
         event.preventDefault();
-        console.log('pushed next question');
+        this.answerForm.reset();
         this.props.dispatch(actions.fetchQuestion());
     }
 
