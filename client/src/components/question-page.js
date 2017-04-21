@@ -54,12 +54,12 @@ export class QuestionPage extends React.Component {
         return (
           <div className='question-container'>
             <div className="user-info">
-              <h3>{this.props.name}</h3>
+              <h2>{this.props.name}</h2>
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
             <div className={`answer-feedback ${hidden}`}>
                 {/*Display Correct or False based on the user's input */}
-                {this.props.correct ? "Correct" : "False"}<br />
+                <h1 className='answer-feedback-text pulse'>{this.props.correct ? "Correct" : "Incorrect"}</h1><br />
             </div>
             <QuestionCard letters={this.props.question.letters}
                           atomic={this.props.question.atomic}
@@ -70,16 +70,17 @@ export class QuestionPage extends React.Component {
                         ref={ref => this.userAnswer = ref}
                         placeholder="Guess Element"
                         disabled={this.props.answered}
+                        autoComplete={false}
                         autoFocus></input>
                 <button type='submit' className={`btn submit-btn ${hideSubmit}`}
                                 disabled={this.props.answered}>Submit</button>
             </form>
-            <button className={`btn next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
+            <button className={`btn pulse2 next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
-                Score this session<br />
-                Correct: {this.props.score}<br />
-                Incorrect: {this.props.negScore}
+                Score <br />
+                Correct  {this.props.score}<br />
+                Incorrect  {this.props.negScore}
             </div>
           </div>
         );

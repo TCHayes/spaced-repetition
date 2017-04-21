@@ -15,7 +15,7 @@
   align-self: center;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 35px;
   background:green;
   border:3px solid #fff;
   width:210px;
@@ -28,7 +28,7 @@ form{
   display: flex;
   flex-direction: column;
   align-self: center;
-  margin-top: 80px;
+  margin-top: 55px;
   width: 216px;
 }
 
@@ -60,8 +60,54 @@ form{
 .answer-feedback {
   position: fixed;
   align-self: center;
-  margin-top: 90px;
+  margin-top: 60px;
+
 }
+/* pulse animation for buttons and answer */
+@keyframes pulse_animation {
+	0% { transform: scale(1); }
+  10% { transform: scale(1.5); }
+  20% { transform: scale(1); }
+	30% { transform: scale(1.5); }
+	40% { transform: scale(1); }
+	50% { transform: scale(1.5); }
+	60% { transform: scale(1); }
+	70% { transform: scale(1.5); }
+	80% { transform: scale(1); }
+  90% { transform: scale(1.5); }
+	100% { transform: scale(1); }
+}
+@keyframes pulse_animation2 {
+	0% { transform: scale(1); }
+  10% { transform: scale(1.2); }
+  20% { transform: scale(1); }
+	30% { transform: scale(1.2); }
+	40% { transform: scale(1); }
+	50% { transform: scale(1.2); }
+	60% { transform: scale(1); }
+	70% { transform: scale(1.2); }
+	80% { transform: scale(1); }
+  90% { transform: scale(1.2); }
+	100% { transform: scale(1); }
+}
+
+.pulse {
+	animation-name: pulse_animation;
+	animation-duration: 4000ms;
+	transform-origin:70% 70%;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.pulse2 {
+	animation-name: pulse_animation2;
+	animation-duration: 4000ms;
+	transform-origin: 70% 70%;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+  }
+
+
 
 #user-answer {
   width: 180px;
@@ -95,6 +141,24 @@ form{
   text-align: center;
 }
 
+.logout {
+  width: 125px;
+  height: 40px;
+  background-color: #1f4524;
+  background: linear-gradient(130deg, #e83c3c 0%, #911b1b 100%, #303030 90%);
+  box-shadow:inset 0px 2px 2px rgba(50,50,50,.6);
+  color: #EDFAFD;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  margin: 10px 0px;
+  align-self: center;
+  font-size: 20px;
+  padding: 5px 15px;
+  text-align: center;
+  margin-top: -50px;
+
+}
+
 .next-btn {
   background: linear-gradient(130deg, #abba46 0%, #8d9d2b 100%, #303030 90%);
   box-shadow:inset 0px 2px 2px rgba(50,50,50,.6);
@@ -108,4 +172,11 @@ form{
 #user-answer:focus {
   border-color: yellow;
   box-shadow: 0px 0px 10px 7px yellow;
+}
+
+.scoreboard {
+  align-self: center;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 24px;
 }
