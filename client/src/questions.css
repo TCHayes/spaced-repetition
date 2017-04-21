@@ -63,7 +63,7 @@ form{
   margin-top: 60px;
 
 }
-
+/*pulse animation for buttons and answer */
 @keyframes pulse_animation {
 	0% { transform: scale(1); }
   10% { transform: scale(1.5); }
@@ -99,13 +99,12 @@ form{
 	animation-timing-function: linear;
 }
 
-.pulse2
-  {
-  	animation-name: pulse_animation2;
-  	animation-duration: 4000ms;
-  	transform-origin: 70% 70%;
-  	animation-iteration-count: infinite;
-  	animation-timing-function: linear;
+.pulse2 {
+	animation-name: pulse_animation2;
+	animation-duration: 4000ms;
+	transform-origin: 70% 70%;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
   }
 
 
