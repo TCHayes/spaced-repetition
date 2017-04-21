@@ -142,6 +142,23 @@ form{
   text-align: center;
 }
 
+.logout {
+  width: 150px;
+  height: 50px;
+  background-color: #1f4524;
+  background: linear-gradient(130deg, #e83c3c 0%, #911b1b 100%, #303030 90%);
+  box-shadow:inset 0px 2px 2px rgba(50,50,50,.6);
+  color: #EDFAFD;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  margin: 10px 0px;
+  align-self: center;
+  font-size: 25px;
+  padding: 5px 15px;
+  text-align: center;
+
+}
+
 .next-btn {
   background: linear-gradient(130deg, #abba46 0%, #8d9d2b 100%, #303030 90%);
   box-shadow:inset 0px 2px 2px rgba(50,50,50,.6);

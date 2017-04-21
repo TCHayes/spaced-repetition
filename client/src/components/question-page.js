@@ -54,7 +54,7 @@ export class QuestionPage extends React.Component {
         return (
           <div className='question-container'>
             <div className="user-info">
-              <h3>{this.props.name}</h3>
+              <h2>{this.props.name}</h2>
               <button className='logout' onClick={this.logout}>Logout</button>
             </div>
             <div className={`answer-feedback ${hidden}`}>
