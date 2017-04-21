@@ -62,7 +62,7 @@ form{
 
 .answer-feedback {
   align-self: center;
-  padding-right: 130px;
+  padding-right: 110px;
   position: relative;
   margin-top: 55px;
 
@@ -74,20 +74,6 @@ form{
 /* pulse animation for buttons and answer */
 @keyframes pulse_animation {
 	0%  { transform: scale(1);}
-  10% { transform: scale(1.5);}
-  20% { transform: scale(1);}
-	30% { transform: scale(1.5);}
-	40% { transform: scale(1);}
-	50% { transform: scale(1.5);}
-	60% { transform: scale(1);}
-	70% { transform: scale(1.5);}
-	80% { transform: scale(1);}
-  90% { transform: scale(1.5);}
-	100%{ transform: scale(1);}
-}
-
-@keyframes pulse_animation2 {
-	0% { transform: scale(1);}
   10% { transform: scale(1.2);}
   20% { transform: scale(1);}
 	30% { transform: scale(1.2);}
@@ -104,19 +90,9 @@ form{
 	animation-name: pulse_animation;
 	animation-duration: 4000ms;
 	transform-origin:70% 70%;
-	animation-iteration-count: infinite;
+	animation-iteration-count: .4;
 	animation-timing-function: linear;
 }
-
-.pulse2 {
-	animation-name: pulse_animation2;
-	animation-duration: 4000ms;
-	transform-origin: 70% 70%;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-  }
-
-
 
 #user-answer {
   font-family: 'pigment_demoregular';
@@ -172,6 +148,8 @@ form{
 .next-btn {
   background: linear-gradient(130deg, #abba46 0%, #8d9d2b 100%, #303030 90%);
   box-shadow:inset 0px 2px 2px rgba(50,50,50,.6);
+  border-color: yellow;
+  box-shadow: 0px 0px 10px 7px yellow;
   color: #EDFAFD;
 }
 

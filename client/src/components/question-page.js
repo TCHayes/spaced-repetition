@@ -75,7 +75,7 @@ export class QuestionPage extends React.Component {
                 <button type='submit' className={`btn submit-btn ${hideSubmit}`}
                                 disabled={this.props.answered}>Submit</button>
             </form>
-            <button className={`btn pulse2 next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
+            <button className={`btn next-btn ${hidden}`} onClick={this.nextQuestion}>Next Element</button>
             <div className='scoreboard'>
                 {/*Display user's current score */}
                 Score <br />

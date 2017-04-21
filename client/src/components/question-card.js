@@ -1,6 +1,4 @@
 import React from 'react';
-import * as actions from '../actions';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default function QuestionCard(props) {
     return(
